@@ -13,14 +13,15 @@ namespace Repo_annan_kod_9
     {
         readonly public Color FlorOrWall = Color.Magenta;
         readonly public Color Roof = Color.Azure;
+        readonly public Texture2D _Tex;
         readonly public float Softnes = 1.0f;
-        readonly public int detail = 0;
         
-        public Material(Color F, Color R, float S, int D){
+        
+        public Material(Color F, Color R, float S, Texture2D T){
             FlorOrWall = F;
             Roof = R;
             Softnes = S;
-            detail = D;
+            _Tex = T;
 
         }
     }

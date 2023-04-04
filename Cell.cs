@@ -11,7 +11,7 @@ namespace Repo_annan_kod_9
 {
     public class Cell
     {
-        readonly public Material _MAT = new Material(Color.HotPink,Color.HotPink,0,0);
+        readonly public Material _MAT = new Material(Color.HotPink,Color.HotPink,0,Game1.pixel);
         readonly public Color COLOR = Color.Magenta;
         readonly public int Type = 0;
         public double health = 100;

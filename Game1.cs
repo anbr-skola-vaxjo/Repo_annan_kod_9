@@ -15,17 +15,22 @@ public class Game1 : Game
     static public GraphicsDeviceManager _graphics;
     static public SpriteBatch _spriteBatch;
     static public Texture2D pixel;
+    static public Texture2D detail;
+    static public Texture2D Entety1;
+    static public SpriteFont font;
+
 
     //vaiebles
     int k = 0;
+    public static double FPS = 0;
     
     //misc
     public static int MapWidth = 40;
     public static int MapHight = 40;
-    public static int IndoorMapWidth = 10;
-    public static int IndoorMapHight = 10;
+    public static int IndoorMapWidth = 40;
+    public static int IndoorMapHight = 40;
     
-    public static int CellSize = 40;
+    public static int CellSize = 10;
     public static int ScreenWidth = 799;
     public static int ScreenHight = 500;
     public bool indoor = true;
@@ -49,7 +54,11 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        E_types.Add(new EntityTypes(Color.Lime,new Vector2(9,10)));
+        pixel = Content.Load<Texture2D>("Pixel");
+        Entety1 = Content.Load<Texture2D>("Sentinal1");
+        detail = Content.Load<Texture2D>("Tex_1");
+        E_types.Add(new EntityTypes(Color.White, Entety1 ,new Vector2(13,10)));
+        E_types.Add(new EntityTypes(Color.Red, pixel ,new Vector2(9,15)));
         if(indoor){
             MapHight = IndoorMapHight;
             MapWidth = IndoorMapWidth;   
@@ -58,13 +67,13 @@ public class Game1 : Game
         
         FloorColor = new Color(0,50,10);
         RoofColor = Color.CadetBlue;
-        _Map.MAT.Add(new Material(new Color(21,24,20),Color.CadetBlue,1f,0));
-        _Map.MAT.Add(new Material(new Color(10,90,80),Color.White,1f,2));
-        _Map.MAT.Add(new Material(Color.Maroon,Color.Maroon,0f,0));
-        _Map.MAT.Add(new Material(new Color(100,10,50),new Color(50,50,50),1f,2));
+        _Map.MAT.Add(new Material(new Color(21,24,20),Color.CadetBlue,1f,pixel));
+        _Map.MAT.Add(new Material(new Color(10,90,80),Color.White,1f,detail));
+        _Map.MAT.Add(new Material(Color.Maroon,Color.Maroon,0f,pixel));
+        _Map.MAT.Add(new Material(new Color(100,10,50),new Color(50,50,50),1f,detail));
         
         if(indoor){
-            _Map.MAT[0] = new Material(new Color(21,24,20),new Color(21,24,20),1f,0);
+            _Map.MAT[0] = new Material(new Color(21,24,20),new Color(21,24,20),1f,pixel);
             FloorColor = new Color(30,40,40);
             RoofColor = new Color(40,40,40);
             _Map.IndoorMapCreator();
@@ -94,7 +103,10 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
+        font = Content.Load<SpriteFont>("Font1");
         pixel = Content.Load<Texture2D>("Pixel");
+        Entety1 = Content.Load<Texture2D>("Sentinal1");
+        detail = Content.Load<Texture2D>("Tex_1");
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
@@ -103,7 +115,7 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         //every x frames
-
+        
         if(k > 100){
             _Map.OutdoorMapCreator();
             k = 0;
@@ -137,14 +149,20 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         
+        FPS = Math.Round(1f/ gameTime.ElapsedGameTime.TotalSeconds);
+        
+        Vector2 FPS_pos = new Vector2(MapWidth * CellSize + 10, 0);
         GraphicsDevice.Clear(Color.DarkSlateGray);
         _spriteBatch.Begin();
         _screen.Room(FloorColor,RoofColor);
-        _Map.DRAW(P1);
+        
         
         P1.RayCast();
         _screen.DrawEntites(_Map._Entities);
-
+        _screen.Draw_Que();
+        
+        _spriteBatch.DrawString(font,"FPS: " + FPS,FPS_pos,Color.Cyan);
+        _Map.DRAW(P1);
         _spriteBatch.End();
         // TODO: Add your drawing code here
 
@@ -177,6 +195,10 @@ public class Game1 : Game
         
         return x+y;
     }
+
+    
+
+    
 }
 
 

@@ -42,10 +42,6 @@
               "target": "Package",
               "version": "[3.8.1.303, )"
             },
-            "MonoGame.Framework.Content.Pipeline": {
-              "target": "Package",
-              "version": "[3.8.1.303, )"
-            },
             "MonoGame.Framework.WindowsDX": {
               "target": "Package",
               "version": "[3.8.1.303, )"

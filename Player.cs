@@ -11,17 +11,14 @@ namespace Repo_annan_kod_9
 {
     
     public class Player
-    {
-        public double info_angle;
-        public float info_ofsett;
-        public Vector2 info_Forward;
-        public Vector2 info_Forward2;
-
+    {  
+        public int RenderDistance = 20;
+        public double info_FOVangle;
         public Vector2 ScreenP;
         public  Vector2 MapP = new Vector2(2f,2f);
         private float speed = 0.02f;
         private int Count = 1;
-        private double screenbend = 1;
+        public double screenbend = 1;
         public double v = 270;
         public double spread = 1;
         public float running_speed = 2.5f;
@@ -50,16 +47,15 @@ namespace Repo_annan_kod_9
         public void SetRay(double S){
             FOV = (int)(Game1.ScreenWidth*0.5)-1;
             spread = S/(double)FOV;
+            info_FOVangle = Math.Round(spread * FOV);
         }
         
         
-
+        
         
         public void Run(){
-            info_angle = Math.Round(spread * FOV);
-            info_ofsett = ((float)info_angle/180f*(float)Math.PI);
-            info_Forward = new Vector2( (float)Math.Cos(V + info_ofsett ),(float)Math.Sin(V + info_ofsett))*-1;
-            info_Forward2 = new Vector2( (float)Math.Cos(V  ),(float)Math.Sin(V ))*-1;
+            
+            
 
             float Xx = 0;
             float Yy = 0;
@@ -135,7 +131,7 @@ namespace Repo_annan_kod_9
         public void DRAW(){
             int S = (int)(Game1.CellSize * 0.2);
             Rectangle R = new Rectangle((int)(ScreenP.X-S*0.5),(int)(ScreenP.Y-S*0.5),S,S);
-            Vector2 Angle = new Vector2((float)Math.Cos(V),(float)Math.Sin(V));
+            Vector2 Angle = new Vector2((float)Math.Cos(V+info_FOVangle/180f*Math.PI),(float)Math.Sin(V+info_FOVangle/180f*Math.PI));
             Rectangle R2 = new Rectangle((int)(R.Center.X-(Angle.X*S*2)-S/4),(int)(R.Center.Y-(Angle.Y*S*2)-S/4),S/2,S/2);
             foreach(RayCastClass ellement in RaysToCast){
                 ellement.drawline();
@@ -167,8 +163,10 @@ namespace Repo_annan_kod_9
         }
         
         public void CastOneRay(double ofsett){
-            int RenderDistance = Game1.MapHight+Game1.MapWidth;
             
+            int RenderCounterX = 0;
+            int RenderCounterY = 0;
+
             CountRay = MapP;
             CountRayside = MapP;
             Vector2 RayPrev = MapP;
@@ -222,13 +220,13 @@ namespace Repo_annan_kod_9
 
             
 
-            for(int i = 0 ; i < RenderDistance ; i++){
+            for(RenderCounterY = 0 ; RenderCounterY < RenderDistance ; RenderCounterY++){
                 int XX = (int)(CountRay.X);
                 int YY = (int)(CountRay.Y);
-                if(XX > 0 && XX < Game1.MapWidth && YY > 0 && YY < Game1.MapHight || i == 0){
+                if(XX > 0 && XX < Game1.MapWidth && YY > 0 && YY < Game1.MapHight || RenderCounterY == 0){
                     
                     if(vo > 180){
-                        if(i != 0){
+                        if(RenderCounterY != 0){
                             if(Game1._Map.MapList[XX,YY].Type != 0 ){
                                 SaveCountRayY = CountRay;
                                 XYc = XX;
@@ -243,7 +241,7 @@ namespace Repo_annan_kod_9
                         CountRay.X +=  XO;    
                     }
                     else if(vo < 180){
-                        if(i != 0){
+                        if(RenderCounterY != 0){
                            
                             if(Game1._Map.MapList[XX,YY-1].Type != 0){
                                 SaveCountRayY = CountRay;
@@ -267,13 +265,13 @@ namespace Repo_annan_kod_9
             float XOside = 1.0f;
             float YOside = (float)Math.Sin(V) * (1.0f)/(float)Math.Cos(V);
 
-            for(int i = 0 ; i < RenderDistance ; i++){
+            for( RenderCounterX = 0 ; RenderCounterX < RenderDistance ; RenderCounterX++){
                 int XX = (int)(CountRayside.X);
                 int YY = (int)(CountRayside.Y);
-                if(XX > 0 && XX < Game1.MapWidth && YY > 0 && YY < Game1.MapHight || i == 0){
+                if(XX > 0 && XX < Game1.MapWidth && YY > 0 && YY < Game1.MapHight || RenderCounterX == 0){
                     
                     if(vo < 90 || vo > 270){
-                        if(i != 0){
+                        if(RenderCounterX != 0){
                             
                             if(Game1._Map.MapList[XX-1,YY].Type != 0){
                                 SaveCountRayX = CountRayside;
@@ -290,8 +288,8 @@ namespace Repo_annan_kod_9
                         CountRayside.X -=  XOside;    
                     }
                     else if(vo > 90 || vo < 270){
-                        if(i != 0){
-                            if(Game1._Map.MapList[XX,YY].Type != 0 && i != 0){
+                        if(RenderCounterX != 0){
+                            if(Game1._Map.MapList[XX,YY].Type != 0 && RenderCounterX != 0){
                                 SaveCountRayX = CountRayside;
 
                                 XXc = XX;
@@ -308,9 +306,7 @@ namespace Repo_annan_kod_9
                         CountRayside.X +=  XOside;    
                     }
                     
-                       
                 }
-                
             }
             double PosOfsett;
             if(ofsett >= 0){
@@ -320,9 +316,6 @@ namespace Repo_annan_kod_9
                 PosOfsett = -ofsett;
             }
 
-            
-            
-            
             Cell M = Game1._Map.MapList[XYc,YYc];
             Color C0 = Game1._Map.MapList[XYc,YYc].COLOR;
             double Distance = 0;
@@ -330,25 +323,30 @@ namespace Repo_annan_kod_9
 
             ScreenCountRayY = CountRay*Game1.CellSize;
             ScreenCountRayX = CountRayside*Game1.CellSize;
-
-
-            if(Vector2.Distance(SaveCountRayY,MapP) <= Vector2.Distance(SaveCountRayX,MapP)){
+            
+            float D_y = Vector2.Distance(SaveCountRayY,MapP);
+            float D_x = Vector2.Distance(SaveCountRayX,MapP);
+            if(D_y < D_x && D_y < RenderDistance-2){
                 RaysToCast.Add(new RayCastClass(ScreenCountRayY,ScreenP,Color.Moccasin));
                 Distance = Vector2.Distance(CountRay,MapP);
                 M = Game1._Map.MapList[XYc,YYc];
-                
+                Game1._screen.DrawWallSegment(Game1.ScreenWidth - Count,1,Distance,FishEyeRemoverPR,M,Brightness);
             }
-            else{
+            else if(D_y > D_x && D_x < RenderDistance-2){
                 RaysToCast.Add(new RayCastClass(ScreenCountRayX,ScreenP,Color.Moccasin));
                 Distance = Vector2.Distance(CountRayside,MapP);
                 int s = (int)Game1._Map.MapList[XXc,YXc]._MAT.Softnes;
                 M = Game1._Map.MapList[XXc,YXc];
                 Brightness = -(25 * s);
+                Game1._screen.DrawWallSegment(Game1.ScreenWidth - Count,1,Distance,FishEyeRemoverPR,M,Brightness);
                 
             }
-            Game1._screen.DrawWallSegment(Game1.ScreenWidth - Count,1,Distance,FishEyeRemoverPR,M,Brightness);
-            
+            else{
+                Vector2 MaxDistance = new Vector2((float)Math.Cos(V) ,(float)Math.Sin(V))*(RenderDistance-2)*-1 * Game1.CellSize + ScreenP;
+                RaysToCast.Add(new RayCastClass(MaxDistance,ScreenP,Color.Moccasin));
+                Game1._screen.DrawWallSegment(Game1.ScreenWidth - Count,1,RenderDistance-2,FishEyeRemoverPR,new Cell(Game1._Map.MAT[0],0),0);
+                
+            }               
         }
-        
     }
 }

@@ -22,7 +22,8 @@ namespace Repo_annan_kod_9
         
         
         public void IndoorMapCreator(){
-            _Entities.Add(new Entitiy(Game1.E_types[0],new Vector2(5f,5f)));
+            _Entities.Add(new Entitiy(Game1.E_types[0],new Vector2(9f,9f)));
+            _Entities.Add(new Entitiy(Game1.E_types[1],new Vector2(6f,2f)));
             for(int iW = 0; iW < W ; iW++){
                 
                 
@@ -74,10 +75,10 @@ namespace Repo_annan_kod_9
                     if(iW > 0 && iW < MapList.GetLength(0)-1 && iH > 0 && iH < MapList.GetLength(1)-1)
                         {MapList[iW,iH] = new Cell(MAT[0], 0);}
                     else 
-                        {MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,2), 1);}
+                        {MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,Game1.detail), 1);}
                     if(perlinmap[iW,iH] > bottom){
                         
-                        MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,2), 1);
+                        MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,Game1.detail), 1);
                     }
                     
                 }
@@ -97,9 +98,11 @@ namespace Repo_annan_kod_9
         
 
         public void DRAW(Player P){
+            Rectangle R = new Rectangle(0,0,Game1.CellSize*W+3,Game1.CellSize*H+Game1.ScreenHight);
+            Game1._spriteBatch.Draw(Game1.pixel,R,Color.DarkSlateGray);
             for(int iW = 0; iW < W ; iW++){
                 for(int iH = 0; iH < H ; iH++){
-                    Rectangle R = new Rectangle(iW*Game1.CellSize+1,iH*Game1.CellSize+1,Game1.CellSize-2,Game1.CellSize-2);
+                    R = new Rectangle(iW*Game1.CellSize+1,iH*Game1.CellSize+1,Game1.CellSize-2,Game1.CellSize-2);
                     
                     Color C =  MapList[iW,iH].COLOR;
                     

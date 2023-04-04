@@ -13,10 +13,12 @@ namespace Repo_annan_kod_9
     {
         public Color _Col;
         public Vector2 size;
+        public Texture2D Tex;
 
-        public EntityTypes(Color C, Vector2 S){
+        public EntityTypes(Color C, Texture2D T, Vector2 S){
             _Col = C;
             size = S;
+            Tex = T;
         }
 
     }
