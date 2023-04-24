@@ -1,4 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Font1.spritefont","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Font1.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21521,1,621466
-"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Pixel.png","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Pixel.xnb","TextureProcessor","Texture2DContent",119,89,0,7850956
-"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Tex_1.png","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Tex_1.xnb","TextureProcessor","Texture2DContent",142,2085,0,0165779
+"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Monster_all_parts.png","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Monster_all_parts.xnb","TextureProcessor","Texture2DContent",265747,1400085,2,237769

@@ -42,6 +42,10 @@
               "target": "Package",
               "version": "[3.8.1.303, )"
             },
+            "MonoGame.Framework.Content.Pipeline": {
+              "target": "Package",
+              "version": "[3.8.1.303, )"
+            },
             "MonoGame.Framework.WindowsDX": {
               "target": "Package",
               "version": "[3.8.1.303, )"
@@ -66,7 +70,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }

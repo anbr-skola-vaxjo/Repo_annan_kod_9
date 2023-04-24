@@ -26,11 +26,19 @@ namespace Repo_annan_kod_9
         }
 
         public void Draw(float f){
-            
-            Color C2 = _color*f; C2.A = 255;
+            Texture2D T = Tex;
+            if(Tex == null){
+                T = Game1.pixel;
                 
-            _color = C2;
-            Game1._spriteBatch.Draw(Tex, Object_Box, _color);
+            }
+            
+            Object_Box.Y += (int)(Object_Box.Height*0.5*Game1.Height_offset);
+                
+            Color C2 = _color*f;
+            _color = C2;            
+            _color.A = 255;
+            
+            Game1._spriteBatch.Draw(T, Object_Box, _color);
         }
         
     }

@@ -4,13 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Monster_all_parts.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Font1.spritefont</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Pixel.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Tex_1.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
