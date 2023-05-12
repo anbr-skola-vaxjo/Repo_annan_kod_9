@@ -16,14 +16,20 @@ namespace Repo_annan_kod_9
         private Color Dark = Color.Purple;
         private List<ScreenObject> _Que = new List<ScreenObject>();
         private List<FloorSegment>[] _Que_floor = new List<FloorSegment>[Game1.ScreenWidth];
+        private SpriteBatch _spriteBatch;
+
+
         public Screen(Player P){
             _player = P;
 
             for(int i = 0 ; i < _Que_floor.Length; i++){
                 _Que_floor[i] = new List<FloorSegment>();
             }
+
+            _spriteBatch = Game1._spriteBatch;
+
         }
-        public void DrawEntites(List<Entitiy> Ent){
+        public void Add_Enteties_to_que(List<Entitiy> Ent){
 
             double angle = _player.info_FOVangle;
             
@@ -61,43 +67,55 @@ namespace Repo_annan_kod_9
                         
                         
                         
-                        _Que.Add(new ScreenObject(Vector2.Distance(Ent_comp_palyer,_player.MapP),1,R2,E.Type._Col,E.Type.Tex));
+                        _Que.Add(new ScreenObject(Vector2.Distance(Ent_comp_palyer,_player.MapP),1,R2,E.Type._Col,E.Type.texture_Layers));
                         
                     }
                 }
             }
         }
         
-        public void DrawWallSegment(int Where, int Width, double Distance, double FishEyeOffset , Cell MC, int B, Vector2 Thiss_cell, Vector2 MapP){
-           
-            Material M = MC._MAT;
-            Color C = new Color(MC.FlorOrWall.R+B,MC.FlorOrWall.G+B,MC.FlorOrWall.B+B);
+        public void Add_Wall_to_que(int Where, double Distance, double FishEyeOffset , Cell MC, int B, Vector2 Thiss_cell, Vector2 MapP){
+
             int H = (int)( Game1.Wall_hight * Game1.ScreenHight/(Distance * FishEyeOffset));
             int Hs = H;
-            
-            Rectangle Wallsegment = new Rectangle(Where+Game1.MapWidth * Game1.CellSize, (int)(Game1.ScreenHight*0.5-H*0.5), Width, H);
+            Rectangle Wallsegment = new Rectangle(Where+Game1.MapWidth * Game1.CellSize, (int)(Game1.ScreenHight*0.5-H*0.5), 1, H);
+            Color C = Color.Black;
+            List<Simple_texture_layer> Tex_Layers = new List<Simple_texture_layer>();
 
-            float cutof = 2;
-            float f = -1f*((float)Distance*cutof/((float)_player.RenderDistance-2))+cutof;
-            if(f > 1){f = 1;}
-            
-           
-            
-            int health = 100 - (int)MC.health;
-            C = new Color(C.R - health, C.G  - health, C.B  - health);
-            float Cell_segment = Vector2.Distance(Thiss_cell,MapP);
-            Texture2D Tex = MC._MAT._Tex;
+            if(MC != null){
+                Material M = MC._MAT;
+                C = new Color(MC.FlorOrWall.R+B,MC.FlorOrWall.G+B,MC.FlorOrWall.B+B);
+                
+                
 
-            if(MC._MAT._Tex.Width != 0){
-                Tex = MC._MAT.Tex_list[(int)(MC._MAT._Tex.Width*Cell_segment)];
+                float cutof = 2;
+                float f = -1f*((float)Distance*cutof/((float)_player.RenderDistance-2))+cutof;
+                if(f > 1){f = 1;}
+                
+            
+                
+                
+                float Cell_segment = Vector2.Distance(Thiss_cell,MapP);
+                
+                foreach(Material_texture_layer Layer in MC._MAT._Texture_Layers){
+                    
+                    Texture2D Tex = Layer._tex;
+
+                    if(Layer._divided_tex.Count() > 1){
+                        Tex = Layer._divided_tex[(int)((Layer._divided_tex.Count()-1)*Cell_segment)];
+                    }
+
+                    Tex_Layers.Add(new Simple_texture_layer(Tex,Layer.Glow));
+                
+                }
+                
             }
             
+            _Que.Add(new ScreenObject((float)(Distance*FishEyeOffset),(float)FishEyeOffset,Wallsegment,C,Tex_Layers));
             
-            
-            _Que.Add(new ScreenObject((float)(Distance*FishEyeOffset),(float)FishEyeOffset,Wallsegment,C,Tex));
         }
 
-        public void Draw_Que(){
+        public void Draw_Wall_Que(){
             sort_ScreenObject_list(_Que);
             float cutof = 2;   
             for(int i = _Que.Count-1; i >= 0; i--){
@@ -112,7 +130,7 @@ namespace Repo_annan_kod_9
             _Que.Clear();
         }
 
-        public void DrawRoom(int Where, int Width, double Distance, Vector2 thiscell, Vector2 MapP , double FishEyeOffset){
+        public void Add_Floor_to_que(int Where, int Width, double Distance, Vector2 thiscell, Vector2 MapP , double FishEyeOffset){
             
             Material C = Game1._Map.MapList[(int)(thiscell.X),(int)(thiscell.Y)]._MAT;
             int H = (int)(Game1.Wall_hight * Game1.ScreenHight/(Distance* FishEyeOffset));
@@ -124,21 +142,26 @@ namespace Repo_annan_kod_9
             Vector2 FloorSegment = new Vector2(Where+Game1.MapWidth * Game1.CellSize, (int)(Game1.ScreenHight*0.5+H*0.5));
             Vector2 RoofSegment = new Vector2(Where+Game1.MapWidth * Game1.CellSize, (int)(Game1.ScreenHight*0.5-H*0.5));
 
-            int _Where = Where;
-            FloorSegment _FloorSegment = new FloorSegment( (int)(Game1.ScreenHight*0.5+H*0.5), H , thiscell, MapP);
-            if(_Where < Game1.ScreenWidth && _Where >= 0){
-                _Que_floor[_Where].Add(_FloorSegment);
+            int _Where;
+            if(Where < Game1.ScreenWidth && Where >= 0){
+                _Where = Where;
             }
             else{
-                _Que_floor[_Where*-1].Add(_FloorSegment);
+                _Where = Where*-1;
             }
+
             
+
+
+            FloorSegment _FloorSegment = new FloorSegment( (int)(Game1.ScreenHight*0.5+H*0.5), H, thiscell, MapP);
+
+            _Que_floor[_Where].Add(_FloorSegment);
+         
 
         }
 
 
         public void Draw_Floor_Que(){
-            Random RD = new Random();
             for(int i = 0 ; i < _Que_floor.Length; i++){
                 sort_FloorSegment_list(_Que_floor[i]);
                 for(int j = _Que_floor[i].Count -2 ; j >= 0; j--){
@@ -201,15 +224,15 @@ namespace Repo_annan_kod_9
                     rC2.A = 255;
 
                     
-                    Game1._spriteBatch.Draw(Game1.pixel, Floor, fC2);
+                    _spriteBatch.Draw(Game1.pixel, Floor, fC2);
                     
-                    Game1._spriteBatch.Draw(Game1.pixel, Floor_ege, Color.Black);
+                    _spriteBatch.Draw(Game1.pixel, Floor_ege, Color.Black);
                     
 
 
-                    Game1._spriteBatch.Draw(Game1.pixel, Roof, rC2);
+                    _spriteBatch.Draw(Game1.pixel, Roof, rC2);
 
-                    Game1._spriteBatch.Draw(Game1.pixel, Roof_ege, Color.Black);
+                    _spriteBatch.Draw(Game1.pixel, Roof_ege, Color.Black);
                     
                 }
             }
@@ -217,15 +240,16 @@ namespace Repo_annan_kod_9
             for(int i = 0 ; i < _Que_floor.Length; i++){
                 _Que_floor[i] = new List<FloorSegment>();
             }
+
+            
         }
 
-
-        public void Room(){
+        public void Horizon(){
             Cell C = Game1._Map.MapList[(int)_player.MapP.X,(int)_player.MapP.Y];
             Rectangle Floor = new Rectangle(Game1.MapWidth * Game1.CellSize+3,(int)(Game1.ScreenHight*0.5),Game1.ScreenWidth,(int)(Game1.ScreenHight*0.5));
             Rectangle Cealing = new Rectangle(Game1.MapWidth * Game1.CellSize+3,0,Game1.ScreenWidth,(int)(Game1.ScreenHight*0.5));
-            Game1._spriteBatch.Draw(Game1.pixel,Floor,C.FlorOrWall);
-            Game1._spriteBatch.Draw(Game1.pixel,Cealing,C.Roof);
+            _spriteBatch.Draw(Game1.pixel,Floor,C.FlorOrWall);
+            _spriteBatch.Draw(Game1.pixel,Cealing,C.Roof);
         }
 
         public void drawline(Vector2 A, Vector2 B, Color C)
@@ -278,7 +302,7 @@ namespace Repo_annan_kod_9
             for(int i = 0 ; i < max ; i++)
             {
                 pen+=new Vector2(p1,p2);   
-                Game1._spriteBatch.Draw(Game1.pixel,pen,C);
+                _spriteBatch.Draw(Game1.pixel,pen,C);
             }
 
         }
@@ -329,16 +353,12 @@ namespace Repo_annan_kod_9
             
             if(List.Count != 0){
                 List.Add(new FloorSegment(0, 0, List[List.Count-1].MapP, List[List.Count-1].Precise_MapP));
-            }
-
-            
-            
-            
-             
-            
+            }        
             
             return new List<FloorSegment>();
         }
+
+        
         
 
         

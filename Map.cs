@@ -105,6 +105,18 @@ namespace Repo_annan_kod_9
                 } 
             }
 
+           for(int i = 0 ; i < Game1.nr_staring_keys ; i++){
+                int X = rd.Next(1,Game1._Map.MapList.GetLength(0)-2);
+                int Y = rd.Next(1,Game1._Map.MapList.GetLength(1)-2);
+                if(Game1._Map.MapList[X,Y].Type == 0){
+                    Game1.Keys_on_map.Add(new Item(Game1._Item_Types[0],new Vector2(X+0.5f,Y+0.5f)));
+                    _Entities.Add(Game1.Keys_on_map[Game1.Keys_on_map.Count-1]._Entety);
+                }
+                else{
+                    i--;
+                }
+            }
+
         }
 
         private void AddRoom_Rectangle(int Max_Width, int Min_Width, int Max_Height, int Min_Height, int Segment){
@@ -272,9 +284,8 @@ namespace Repo_annan_kod_9
 
 
         public void IndoorMapCreator(){
-            _Entities.Add(new Entitiy(Game1.E_types[0],new Vector2(9f,9f)));
-            _Entities.Add(new Entitiy(Game1.E_types[0],new Vector2(9f,10f)));
-            _Entities.Add(new Entitiy(Game1.E_types[1],new Vector2(6f,2f)));
+            //_Entities.Add(new Entitiy(Game1.E_types[1],new Vector2(1f,1f)));
+            
             
             for(int iW = 0; iW < W ; iW++){
                 
@@ -284,8 +295,10 @@ namespace Repo_annan_kod_9
                     
 
                     
-                    if(iW > 0 && iW < MapList.GetLength(0)-1 && iH > 0 && iH < MapList.GetLength(1)-1)
-                        {MapList[iW,iH] = new Cell(MAT[0], 0);}
+                    if(iW > 0 && iW < MapList.GetLength(0)-1 && iH > 0 && iH < MapList.GetLength(1)-1){
+                        MapList[iW,iH] = new Cell(MAT[0], 0);
+                    }
+                        
                     else
                         {MapList[iW,iH] = new Cell(MAT[1], 1);}
 
@@ -296,91 +309,38 @@ namespace Repo_annan_kod_9
             
             MapList[2,3] = new Cell(MAT[0], 0);
             MapList[4,6] = new Cell(MAT[1], 0);
-            MapList[5,7] = new Cell(MAT[3], 0);
+           
 
 
         }
 
-        public void OutdoorMapCreator(){
-            double[,] perlinmap = perlinmaker(60,3,4,200,-10,10,-1);
-            double[,] perlinmap2 = perlinmaker(15,3,6,30,20,4,0);
-            double[,] perlinmap3 = perlinmaker(20,3,2,100,30,10,0);
-            double[,] perlinmap4 = perlinmaker(20,3,2,100,30,10,0);
-            double bottom = 1;
-            double bottom2 = 0.5;
-
-            for(int iW = 0; iW < W ; iW++){
-                for(int iH = 0; iH < H ; iH++){
-                    if(perlinmap2[iW,iH] < bottom2 ){
-                        perlinmap[iW,iH] = perlinmap2[iW,iH];
-                    }
-                    if(perlinmap3[iW,iH] > bottom2 ){
-                        perlinmap[iW,iH] = perlinmap3[iW,iH];
-                    }
-                    if(perlinmap4[iW,iH] > bottom2 ){
-                        perlinmap[iW,iH] = perlinmap4[iW,iH];
-                    }
-                    
-                }
-            }
-            
-
-            for(int iW = 0; iW < W ; iW++){
-                for(int iH = 0; iH < H ; iH++){
-                    
-                    int h =(int)(((perlinmap[iW,iH]*perlinmap[iW,iH]*0.5)+50));
-                    if(h>100){
-                        h=100;
-                    }
-                    if(iW > 0 && iW < MapList.GetLength(0)-1 && iH > 0 && iH < MapList.GetLength(1)-1)
-                        {MapList[iW,iH] = new Cell(MAT[0], 0);}
-                    else 
-                        {MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,1f,Game1.detail), 1);}
-                    if(perlinmap[iW,iH] > bottom){
-                        
-                        MapList[iW,iH] = new Cell(new Material(new Color(h,h,h),Color.White,1f,1f,Game1.detail), 1);
-                    }
-                    
-                }
-            }   
-            
-            for(int i = 0 ; i < 10 ; i++){
-                int X = rd.Next(1,MapList.GetLength(0)-2);
-                int Y = rd.Next(1,MapList.GetLength(1)-2);
-                if(MapList[X,Y].Type == 0){
-                    MapList[X,Y] = new Cell(MAT[2], 1);
-                    break;
-                }
-            }
-            
-                     
-        }
+       
         
 
         public void DRAW(Player P){
             int _CellSize = Game1.CellSize;
-            Rectangle R = new Rectangle(0 , 0 , _CellSize * W , Game1.WindowHigth);
-            Game1._spriteBatch.Draw(Game1.pixel,R,Game1.UI_color1);
+            if(_CellSize > 0){
+                Rectangle R = new Rectangle(0 , 0 , _CellSize * W , Game1.WindowHigth);
+                Game1._spriteBatch.Draw(Game1.pixel,R,Game1.UI_color1);
 
-            R = new Rectangle(0 , Game1.ScreenHight , Game1.ScreenWidth + W*_CellSize, Game1.WindowHigth - Game1.ScreenHight);
-            Game1._spriteBatch.Draw(Game1.pixel,R,Game1.UI_color2);
-            for(int iW = 0; iW < W ; iW++){
-                for(int iH = 0; iH < H ; iH++){
-                    R = new Rectangle(iW*_CellSize,iH*_CellSize+1,_CellSize,_CellSize);
-                    
-                    Color C =  MapList[iW,iH].FlorOrWall;
-                    
-                    
-                    Game1._spriteBatch.Draw(Game1.pixel,R,C);
+                R = new Rectangle(0 , Game1.ScreenHight , Game1.ScreenWidth + W*_CellSize, Game1.WindowHigth - Game1.ScreenHight);
+                Game1._spriteBatch.Draw(Game1.pixel,R,Game1.UI_color2);
+                for(int iW = 0; iW < W ; iW++){
+                    for(int iH = 0; iH < H ; iH++){
+                        R = new Rectangle(iW*_CellSize,iH*_CellSize+1,_CellSize,_CellSize);
+                        
+                        Color C =  MapList[iW,iH].FlorOrWall;
+                        
+                        
+                        Game1._spriteBatch.Draw(Game1.pixel,R,C);
 
-                    if(MapList[iW,iH]._MAT == MAT[2]){
-                        Game1._spriteBatch.Draw(Game1.pixel,R, MAT[0].FlorOrWall);
+                        
                     }
                 }
-            }
-            P.DRAW();
-            foreach(Entitiy E in _Entities){
-                DrawEntity(E);
+                P.DRAW();
+                foreach(Entitiy E in _Entities){
+                    DrawEntity(E);
+                }
             }
         }
 
@@ -392,48 +352,5 @@ namespace Repo_annan_kod_9
             Game1._spriteBatch.Draw(Game1.pixel,R,E.Type._Col);
         }
 
-    
-        
-        private double[,] perlinmaker (int NrKernals,int KernalRadius,int BlendNR,double HeightMax, double HeightMin,double WallHeight, double FloorHeight){
-
-            double[,] perlinmap = new double[W,H];
-            double[,] SAVEperlinmap = new double[W,H];
-            for(int iW = 0; iW < W ; iW++){
-                for(int iH = 0; iH < H ; iH++){
-                    if(iW > 0 && iW < MapList.GetLength(0)-2 && iH > 0 && iH < MapList.GetLength(1)-2)
-                        {perlinmap[iW,iH]=FloorHeight;}
-                    else 
-                        {perlinmap[iW,iH]=WallHeight;}
-                    
-                }
-            }
-
-            for(int i = 0 ; i < NrKernals ; i++){
-                int x = rd.Next(0,W);
-                int y = rd.Next(0,H);
-                perlinmap[x,y] = rd.Next((int)HeightMin,(int)HeightMax+1);
-            }
-            for(int j = 0 ; j < BlendNR ; j++){
-                for(int iW = 0; iW < W ; iW++){
-                    for(int iH = 0; iH < H ; iH++){
-                        double HC = 0;
-                        double counter = 0;
-                        for(int Kx = -KernalRadius; Kx < KernalRadius ; Kx++){
-                            for(int Ky = -KernalRadius; Ky< KernalRadius ; Ky++){
-                                if(Kx + iW  >= 0 && Kx + iW < W && Ky + iH >= 0 && Ky + iH < H ){
-                                    HC += perlinmap[iW+Kx,iH+Ky];
-                                    counter++;
-                                }
-                            }
-                        }
-                        SAVEperlinmap[iW,iH] = HC / counter;
-                    }
-                }
-                perlinmap = SAVEperlinmap;
-                SAVEperlinmap = new double[W,H];
-            }
-
-            return perlinmap;
-        } 
     }
 }
