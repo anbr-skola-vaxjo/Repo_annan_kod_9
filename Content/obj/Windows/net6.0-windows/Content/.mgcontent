@@ -4,17 +4,43 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Door_open.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Door_wall.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Door2.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Door3.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Escape_.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Escape2.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Eyes.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Font1.spritefont</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Jumscare.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Key.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Kompas.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Lampa1.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Monster_all_parts.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Old_Walpaper_01.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Pixel.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Sentinal1.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shader_.fx</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shader_02.fx</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shadow.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shadow2.png</File>
+    <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Sploosh.png</File>
     <File>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Tex_1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

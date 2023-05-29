@@ -83,3 +83,16 @@ C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\runtime
 C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\runtimes\win-x64\native\nvtt.dll
 C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Monster_all_parts.xnb
 C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Eyes.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Shadow.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Shadow2.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Shader_.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Key.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Shader_02.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Jumscare.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Door_open.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Door_wall.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Sploosh.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Door2.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Door3.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Escape_.xnb
+C:\Kod och programering\GitHub\Repo_annan_kod_9\bin\Debug\net6.0-windows\Content\Escape2.xnb

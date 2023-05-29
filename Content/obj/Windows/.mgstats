@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Monster_all_parts.png","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Monster_all_parts.xnb","TextureProcessor","Texture2DContent",265747,1400085,2,237769
+"C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shader_02.fx","C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Shader_02.xnb","EffectProcessor","CompiledEffectContent",1530,42118,4,128381

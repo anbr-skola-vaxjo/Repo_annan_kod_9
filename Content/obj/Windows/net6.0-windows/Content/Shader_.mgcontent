@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Shader_.fx</SourceFile>
+  <SourceTime>2023-05-08T10:05:38.8475411+02:00</SourceTime>
+  <DestFile>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Content/Shader_.xnb</DestFile>
+  <DestTime>2023-05-08T10:31:48.9630979+02:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Auto</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

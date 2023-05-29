@@ -13,14 +13,16 @@ namespace Repo_annan_kod_9
     {
         public Color _Col;
         public Vector2 size;
-        public Texture2D Tex;
-        public Texture2D Glow;
+        public List<Simple_texture_layer> texture_Layers = new List<Simple_texture_layer>();
+        public float Speed = 0.02f;
 
-        public EntityTypes(Color C, Texture2D T, Texture2D G, Vector2 S){
+
+
+        public EntityTypes(Color C, List<Simple_texture_layer> TL, Vector2 S, float sp){
             _Col = C;
             size = S;
-            Tex = T;
-            Glow = G;
+            texture_Layers = TL;
+            Speed = sp;
         }
 
     }

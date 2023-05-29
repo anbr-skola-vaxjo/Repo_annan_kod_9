@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/Monster_all_parts.png</SourceFile>
-  <SourceTime>2023-04-21T10:32:42.7452476+02:00</SourceTime>
+  <SourceTime>2023-04-21T11:19:06.2541079+02:00</SourceTime>
   <DestFile>C:/Kod och programering/GitHub/Repo_annan_kod_9/Content/bin/Windows/Monster_all_parts.xnb</DestFile>
-  <DestTime>2023-04-21T11:10:14.7886939+02:00</DestTime>
+  <DestTime>2023-04-30T14:41:51.1373754+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

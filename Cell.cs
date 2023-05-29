@@ -16,7 +16,6 @@ namespace Repo_annan_kod_9
         public Color FlorOrWall = Color.Magenta;
         public Color Roof = Color.Magenta;
         public int Type = 0;
-        public double health = 100;
         private Random rd = new Random();
         
 

@@ -13,6 +13,8 @@ namespace Repo_annan_kod_9
     {
         public int s_Where;
         public int H;
+
+        
         public Vector2 MapP;
         public Vector2 Precise_MapP;
         public Color fC; // floor Color
@@ -21,6 +23,9 @@ namespace Repo_annan_kod_9
         public FloorSegment(int w, int h, Vector2 M, Vector2 MM){
             s_Where = w;
             H = h;
+
+            
+
             MapP = M;
             Precise_MapP = MM;
             fC = Game1._Map.MapList[(int)(M.X),(int)(M.Y)].FlorOrWall;
