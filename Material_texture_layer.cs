@@ -15,6 +15,8 @@ namespace Repo_annan_kod_9
         public Texture2D[] _divided_tex;
         public bool Glow;
 
+        
+
         public Material_texture_layer(Texture2D T, bool G){
             _tex = T;
             Glow = G;
@@ -25,6 +27,7 @@ namespace Repo_annan_kod_9
             else{
                 _divided_tex = new Texture2D[1]{_tex};
             }
+            
         }
 
         
@@ -36,13 +39,17 @@ namespace Repo_annan_kod_9
             int Tex_Height = T.Height;
             int Tex_Width = T.Width;
             Texture2D[] T_list = new Texture2D[Tex_Width];
-
+            
             if(Tex_Width > 1){
             
                 Color[] pixel_list = new Color[Tex_Width*Tex_Height];
                 for(int i = 0 ; i < Tex_Width ; i++){
                     
                     T.GetData<Color>(pixel_list);
+                    
+                    if(Keyboard.GetState().IsKeyDown(Game1.Fast_exit_key)){
+                        Game1.Instance.Exit();
+                    }
                     
                     T_list[i] = new Texture2D(Game1._graphicsdevice,1,Tex_Height);
                     

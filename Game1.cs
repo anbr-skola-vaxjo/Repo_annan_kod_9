@@ -11,6 +11,9 @@ namespace Repo_annan_kod_9;
 
 public class Game1 : Game
 {
+    public static Game1 Instance => instance;
+
+    static Game1 instance;
     //graphics
     static public GraphicsDeviceManager _graphics;
     static public GraphicsDevice _graphicsdevice;
@@ -171,7 +174,7 @@ public class Game1 : Game
         private int Spawing_distance = 10;
 
     //keybindes
-        private Keys Fast_exit_key = Keys.Delete; 
+        public static Keys Fast_exit_key = Keys.Delete; 
         private Keys Pause_key = Keys.Escape; 
         private Keys Fullscreen = Keys.Home;
 
@@ -196,7 +199,7 @@ public class Game1 : Game
         _graphics.GraphicsProfile = GraphicsProfile.HiDef;
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        
+        instance = this;
     }
 
     protected override void Initialize()
@@ -268,7 +271,7 @@ public class Game1 : Game
         
         
         if(Keyboard.GetState().IsKeyDown(Fast_exit_key))
-                Exit();
+            Exit();
         
         //first frame
         if(_frame == First_frame){
@@ -919,6 +922,7 @@ public class Game1 : Game
         Fade_to_black = 1;
     }
     
+     
 
     
 }
