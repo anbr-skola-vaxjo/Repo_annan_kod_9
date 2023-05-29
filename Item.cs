@@ -19,13 +19,11 @@ namespace Repo_annan_kod_9
         public Item(Item_Types I, Vector2 P){
             Type = I;
             MapP = P;
-            if(MapP != null){
-                on_floor = true;
-                _Entety = new Entitiy(Type.E_type,MapP);
-            }
-            else{
-                on_floor = false;
-            }
+            
+            on_floor = true;
+            _Entety = new Entitiy(Type.E_type,MapP);
+            
+            
         }
 
         public void run(){
